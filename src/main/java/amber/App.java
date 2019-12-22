@@ -11,7 +11,11 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         String letter;
 
-        while (!hg.isGameOver()) {
+        Hangman hangman = Hangman.getInstance();
+        System.out.println(hangman.getHangmen());
+        System.out.println("dsfsf");
+
+     /*   while (!hg.isGameOver()) {
             System.out.println(hg.getGuessedWord());
             try {
                 System.out.println("Guess the letter");
@@ -28,6 +32,6 @@ public class App {
         }
 
         System.out.println("The word is " + hg.getGuessedWord());
-        System.out.println("Congratulations!");
+        System.out.println("Congratulations!");*/
     }
 }
