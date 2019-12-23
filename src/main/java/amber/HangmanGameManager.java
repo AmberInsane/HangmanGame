@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class HangmanGameManager {
-    private final String LETTER_PATTERN = "[a-z]";
+    private final String LETTER_PATTERN = "[a-zа-я]";
     private final char SPACE_CHAR = '*';
     private char[] word;
     private char[] guessedWord;
@@ -40,9 +40,9 @@ public class HangmanGameManager {
                 } else {
                     System.out.println("Sorry, I can't find " + letter);
                     System.out.println(hangmanPicture.getHangmen().get(counter++));
+                    System.out.println("Number of left errors is " + (hangmanPicture.getHangmen().size() - counter));
                 }
                 alreadyGuessed.add(letter.charAt(0));
-                System.out.println("Number of left errors is " + (hangmanPicture.getHangmen().size() - counter));
             }
         } catch (NotLetterException e) {
             System.out.println(e.getMessage());
@@ -66,7 +66,7 @@ public class HangmanGameManager {
     }
 
     public void checkChar(String guessChar) {
-        if ((guessChar.length() != 1) || (!guessChar.matches(LETTER_PATTERN))) {
+        if ((guessChar.length() != 1) || (!guessChar.toLowerCase().matches(LETTER_PATTERN))) {
             throw new NotLetterException("Sorry, but '" + guessChar + "' is not a letter");
         }
     }
