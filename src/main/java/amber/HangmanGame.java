@@ -1,53 +1,28 @@
 package amber;
 
-public class HangmanGame {
-    private final String LETTER_PATTERN = "[a-z]";
-    private final char SPACE_CHAR = '_';
-    private char[] word;
-    private char[] guessedWord;
+import java.util.Scanner;
 
-    public HangmanGame(String word) {
-        this.word = word.toLowerCase().toCharArray();
-        guessedWord = new char[word.length()];
-        for (int i = 0; i < guessedWord.length; i++) {
-            guessedWord[i] = SPACE_CHAR;
+public class HangmanGame implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Welcome to HangmanGame!");
+        String word = getWord();
+        HangmanGameManager manager = new HangmanGameManager(word);
+        startGame(manager);
+    }
+
+    private void startGame(HangmanGameManager manager) {
+        Scanner scanner = new Scanner(System.in);
+        String letter;
+        while (!manager.isGameOver()) {
+            System.out.println("Word: " + manager.getGuessedWord());
+            System.out.println("Guess the letter");
+            letter = scanner.next();
+            manager.guessLetter(letter);
         }
     }
 
-    public String getWord() {
-        return String.valueOf(word);
-    }
-
-    public String getGuessedWord() {
-        return String.valueOf(guessedWord);
-    }
-
-    public boolean isWordContainChar(String guessChar) {
-        if ((guessChar.length() != 1) || (!guessChar.matches(LETTER_PATTERN))) {
-            throw new NotLetterException("Sorry, but '" + guessChar + "' is not a letter");
-        }
-
-        char currentChar = guessChar.charAt(0);
-        boolean isContain = false;
-        int counter = 0;
-        for (int i = 0; i < word.length; i++) {
-            if (word[i] == currentChar) {
-                guessedWord[i] = currentChar;
-                counter++;
-            }
-        }
-        if (counter > 0) {
-            isContain = true;
-        }
-        return isContain;
-    }
-
-    public boolean isGameOver() {
-        for (char aGuessedWord : guessedWord) {
-            if (aGuessedWord == SPACE_CHAR) {
-                return false;
-            }
-        }
-        return true;
+    private String getWord() {
+        return "cat";
     }
 }

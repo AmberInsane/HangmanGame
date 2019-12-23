@@ -4,17 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hangman {
+public class HangmanPicture {
     private final static String HANGMAN_RESOURCE = "Hangman ASCII.txt";
     private final static String HANGMAN_INDICATOR = "Hangman";
-    private static Hangman instance;
+    private static HangmanPicture instance;
     private List<String> hangmen;
 
-    private Hangman() {
+    private HangmanPicture() {
         hangmen = getHangmenFromResources();
     }
 
@@ -50,13 +49,9 @@ public class Hangman {
         return hangmen;
     }
 
-    public void setHangmen(List<String> hangmen) {
-        this.hangmen = hangmen;
-    }
-
-    public static synchronized Hangman getInstance() {
+    public static synchronized HangmanPicture getInstance() {
         if (instance == null) {
-            instance = new Hangman();
+            instance = new HangmanPicture();
         }
         return instance;
     }
